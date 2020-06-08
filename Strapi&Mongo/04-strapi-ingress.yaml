@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: strapi-ingress
+spec:
+  rules:
+  - host: ejemplo.com
+    http:
+      paths:
+      - path: /strapi
+        backend:
+          serviceName: strapi-svc
+          servicePort: 1337
