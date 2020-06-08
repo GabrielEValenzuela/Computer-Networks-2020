@@ -3,11 +3,11 @@ kind: StatefulSet
 metadata:
   name: mongo
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mongo
   serviceName: "mongo-svc"
-  replicas: 1 
   template:
     metadata:
       labels:
@@ -17,19 +17,19 @@ spec:
       containers:
       - name: mongo
         image: mongo
+        env:
+        - name: MONGO_INITDB_DATABASE
+          value: "strapi"
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: strapi
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: strapi
         ports:
         - containerPort: 27017
           name: mongo
         volumeMounts:
         - name: mongo-ps
           mountPath: /data/db
-        env:
-          - name: MONGO_INITDB_DATABASE
-            value: "strapi-app"
-          - name: MONGO_INITDB_ROOT_USERNAME
-            value: strapi
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            value: strapi
   volumeClaimTemplates:
   - metadata:
       name: mongo-ps
