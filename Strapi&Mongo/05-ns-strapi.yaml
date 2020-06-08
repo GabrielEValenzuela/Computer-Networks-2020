@@ -1,4 +1,6 @@
-kind: Namespace
 apiVersion: v1
+kind: Namespace
 metadata:
-  name: testing2
+  name: ns-strapi
+  labels:
+    name: ns-strapi
