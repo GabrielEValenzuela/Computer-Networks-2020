@@ -1,12 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: strapi-svc
-  labels:
-    app: strapi
+  name: strapi-lb
 spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
-  - port: 1337
-    name: strapi
+    - protocol: TCP
+      port: 80
+      targetPort: 1337
   selector:
     app: strapi
+status:
+  loadBalancer: 
+    ingress:
+    - ip: 172.17.0.2
